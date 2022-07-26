@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "717797872323",
+    "project_id": "netrootfb",
+    "storage_bucket": "netrootfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717797872323:android:78937b7a48f7339d0f4876",
+        "android_client_info": {
+          "package_name": "com.example.netrootfb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717797872323-hdeat62mkqesa2u95vdsuj8m3hna9elv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_BzcKoaE9R7TuAa-9vDOdkQs4zgRhOis"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717797872323-hdeat62mkqesa2u95vdsuj8m3hna9elv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
