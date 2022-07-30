@@ -27,19 +27,20 @@
         android:id="@+id/receiverText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="textMultiLine"
+        android:maxWidth="270dp"
+        android:minWidth="50dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/receiverTime"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        android:maxWidth="270dp"
-        android:minWidth="50dp"
-        android:layout_margin="8dp"
-        android:inputType="textMultiLine"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="66dp" />
+        android:layout_marginStart="4dp"
+        app:layout_constraintGuide_begin="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logout:
                 mauth.signOut();
                 startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+                break;
+            case R.id.groupChat:
+                mauth.signOut();
+                startActivity(new Intent(getApplicationContext(), GroupChatActivity.class));
+                break;
 
         }
         return super.onOptionsItemSelected(item);

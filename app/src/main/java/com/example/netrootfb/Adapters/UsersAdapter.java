@@ -14,6 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.netrootfb.ChatDetailActivity;
 import com.example.netrootfb.Model.Users;
 import com.example.netrootfb.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,6 +45,30 @@ Context context;
         Users users=list.get(position);
         Picasso.get().load(users.getProfilepic()).placeholder(R.drawable.profile).into(holder.image);
         holder.userName.setText(users.getUserName());
+
+        FirebaseDatabase.getInstance().getReference().child("chats")
+                .child(FirebaseAuth.getInstance().getUid() + users.getUserId())
+                .orderByChild("TimeStamp")
+                .limitToLast(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.hasChildren()){
+                            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                               String lastmsg = dataSnapshot.child("message").getValue(String.class);
+                               holder.lastMessage.setText(lastmsg);
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
