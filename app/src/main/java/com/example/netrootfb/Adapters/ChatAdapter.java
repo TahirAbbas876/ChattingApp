@@ -1,6 +1,8 @@
 package com.example.netrootfb.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.netrootfb.Model.MessageModel;
 import com.example.netrootfb.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -20,10 +23,17 @@ public class ChatAdapter extends RecyclerView.Adapter {
     Context context;
     int SENDER_VIEW_TYPE = 1;
      int RECEIVER_VIEW_TYPE = 2;
+     String recId;
 
     public ChatAdapter(ArrayList<MessageModel> messageModels, Context context) {
         this.messageModels = messageModels;
         this.context = context;
+    }
+
+    public ChatAdapter(ArrayList<MessageModel> messageModels, Context context, String recId) {
+        this.messageModels = messageModels;
+        this.context = context;
+        this.recId = recId;
     }
 
     @Override
@@ -56,6 +66,36 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MessageModel messageModel = messageModels.get(position);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Delete")
+                        .setMessage("Are you sure you want to delete! ")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                               FirebaseDatabase database= FirebaseDatabase.getInstance();
+                               String sender=FirebaseAuth.getInstance().getUid() + recId;
+
+                               database.getReference().child("chats").child(sender)
+                                       .child(messageModel.getMessageId()).setValue(null);
+
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).show();
+
+
+                return false;
+            }
+        });
+
+
         if(holder.getClass() == senderViewHolder.class){
             ((senderViewHolder)holder).senderMsg.setText(messageModel.getMessage());
 

@@ -33,6 +33,14 @@ ProgressDialog progressDialog;
        binding.btnLogIn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               if(binding.etlEmail.getText().toString().isEmpty()){
+                   binding.etlEmail.setError("Enter a valid email");
+                   return;
+               }
+               if(binding.etlPassword.getText().toString().isEmpty()){
+                   binding.etlPassword.setError("Enter minimum 6 digit");
+                   return;
+               }
                 progressDialog.show();
                mauth.signInWithEmailAndPassword(binding.etlEmail.getText().toString(),binding.etlPassword.getText().toString())
                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -14,6 +14,7 @@ import com.example.netrootfb.Adapters.UsersAdapter;
 import com.example.netrootfb.Model.Users;
 import com.example.netrootfb.R;
 import com.example.netrootfb.databinding.FragmentChatsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -47,7 +48,10 @@ FirebaseDatabase database;
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Users users = dataSnapshot.getValue(Users.class);
                     users.setUserId(dataSnapshot.getKey());
-                    list.add(users);
+                    if(!users.getUserId().equals(FirebaseAuth.getInstance().getUid())){
+                        list.add(users);
+                    }
+
                 }
                 adapter.notifyDataSetChanged();
 

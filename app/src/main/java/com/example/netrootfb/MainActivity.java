@@ -9,7 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.netrootfb.R;
 import com.example.netrootfb.Adapters.FragmentsAdapter;
+import com.example.netrootfb.GroupChatActivity;
+import com.example.netrootfb.SettingsActivity;
+import com.example.netrootfb.SignInActivity;
 import com.example.netrootfb.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.setting:
-                Toast.makeText(this, "Setting is selected", Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.logout:
                 mauth.signOut();

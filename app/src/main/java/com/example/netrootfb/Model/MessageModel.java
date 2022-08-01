@@ -2,7 +2,7 @@ package com.example.netrootfb.Model;
 
 public class MessageModel {
 
-    String uId,message;
+    String uId,message,messageId;
     long timeStamp;
 
     public MessageModel(String uId, String message) {
@@ -16,6 +16,14 @@ public class MessageModel {
         this.timeStamp = timeStamp;
     }
     public MessageModel(){}
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
 
     public String getuId() {
         return uId;

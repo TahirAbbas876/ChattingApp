@@ -31,7 +31,7 @@ public class GroupChatActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
-        binding.backArrow.setOnClickListener(new View.OnClickListener() {
+        binding.backGroupArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -42,8 +42,8 @@ public class GroupChatActivity extends AppCompatActivity {
         final String senderId = FirebaseAuth.getInstance().getUid();
         binding.userName.setText("Friends Group");
         final ChatAdapter adapter = new ChatAdapter(messageModels, this);
-        binding.chatRecyclerView.setAdapter(adapter);
-        binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.groupChatRecyclerView.setAdapter(adapter);
+        binding.groupChatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         database.getReference().child("Group Chat").addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,13 +63,13 @@ public class GroupChatActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnSend.setOnClickListener(new View.OnClickListener() {
+        binding.btnGroupSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              final String message = binding.etMessage.getText().toString();
+              final String message = binding.etGroupMessage.getText().toString();
               final MessageModel model = new MessageModel(senderId,message);
               model.setTimeStamp(new Date().getTime());
-              binding.etMessage.setText(" ");
+              binding.etGroupMessage.setText(" ");
               database.getReference().child("Group Chat").push().setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                   @Override
                   public void onSuccess(Void unused) {

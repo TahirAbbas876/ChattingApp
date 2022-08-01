@@ -9,7 +9,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecyclerView"
+        android:id="@+id/groupChatRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
@@ -24,7 +24,7 @@
         android:layout_alignParentBottom="true">
 
         <EditText
-            android:id="@+id/etMessage"
+            android:id="@+id/etGroupMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
             />
 
         <ImageView
-            android:id="@+id/btnSend"
+            android:id="@+id/btnGroupSend"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="4dp"
@@ -60,7 +60,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/backArrow"
+                android:id="@+id/backGroupArrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow"
@@ -78,7 +78,7 @@
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/backArrow"
+                app:layout_constraintStart_toEndOf="@+id/backGroupArrow"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

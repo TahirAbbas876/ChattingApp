@@ -51,7 +51,7 @@ FirebaseAuth mauth;
         });
 
         final ArrayList<MessageModel> messageModels = new ArrayList<>();
-        final ChatAdapter chatAdapter = new ChatAdapter(messageModels,this);
+        final ChatAdapter chatAdapter = new ChatAdapter(messageModels,this,receiveId);
         binding.chatRecyclerView.setAdapter(chatAdapter);
         binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -64,6 +64,7 @@ FirebaseAuth mauth;
                 messageModels.clear();
                 for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                     MessageModel model = dataSnapshot.getValue(MessageModel.class);
+                    model.setMessageId(dataSnapshot.getKey());
                     messageModels.add(model);
                 }
                 chatAdapter.notifyDataSetChanged();
@@ -79,6 +80,10 @@ FirebaseAuth mauth;
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(binding.etMessage.getText().toString().isEmpty()){
+                    binding.etMessage.setError("Type a message");
+                    return;
+                }
                 String message=binding.etMessage.getText().toString();
                 final MessageModel model = new MessageModel(senderId,message);
                 model.setTimeStamp(new Date().getTime());
